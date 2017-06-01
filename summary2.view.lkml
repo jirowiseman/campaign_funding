@@ -4,6 +4,7 @@ view: summary2 {
   dimension: amount {
     type: number
     sql: ${TABLE}.amount ;;
+    value_format_name: usd
   }
 
   dimension: candidate {
@@ -134,5 +135,12 @@ view: summary2 {
     type: count
     approximate_threshold: 100000
     drill_fields: [committee_name, committee_organization_name, name]
+  }
+
+  measure: total_amount {
+    type: sum
+    sql: ${TABLE}.amount ;;
+    value_format_name: usd
+    drill_fields: [amount,name,city,state,occupation,election_year]
   }
 }
